@@ -15,7 +15,7 @@ const char* password = "ileff12345";
 // -------- MQTT --------
 const char* mqtt_server = "172.20.10.4";   // IP de ton PC Node-RED
 const int mqtt_port = 1883;
-const char* mqtt_topic = "iot/sante/capteurs";
+const char* mqtt_topic = "ded/sensors";
 
 // -------- OBJETS --------
 WiFiClient espClient;
@@ -126,11 +126,10 @@ Serial.println(WiFi.localIP());
   // JSON creation
   StaticJsonDocument<256> doc;
 
-  doc["humidity"] = data.humidity;
-  doc["temperature"] = data.temperature;
-  doc["ambientTemp"] = ambient;
-  doc["objectTemp"] = objectT;
-  doc["light"] = lux;
+doc["temp"]      = data.temperature;   
+doc["humidity"]  = data.humidity;
+doc["lux"]       = lux;                
+doc["eye_temp"]  = objectT;  
 
   char buffer[256];
   serializeJson(doc, buffer);
